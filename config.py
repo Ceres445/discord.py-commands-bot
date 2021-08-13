@@ -19,6 +19,5 @@ def load_vars():
         except KeyError:
             load_dotenv()
             print('loaded local dotenv file')
-            postgres = os.environ['uri']
-            token = os.environ['token']
+            token = os.environ['TOKEN']
     return postgres, token
