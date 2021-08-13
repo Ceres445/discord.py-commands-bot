@@ -10,7 +10,7 @@ from discord.ext.commands import CommandNotFound
 
 import config
 
-cogs = []  # Add cogs here Ex. cogs.test
+cogs = ['cogs.admin', 'cogs.utility']  # Add cogs here Ex. cogs.test
 
 
 class Bot(commands.AutoShardedBot):
