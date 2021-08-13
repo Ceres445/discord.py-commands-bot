@@ -43,16 +43,16 @@ class Utility(commands.Cog):
                 embed.add_field(name=f'Message deleted',
                                 value=f"Author: {message.author.mention}\n"
                                       f"Content: {message.content or 'They sent nothing'}\n"
-                                      f"Deleted: {deleted_at}")
+                                      f"Deleted: {deleted_at} UTC")
                 files += [await x.to_file() for x in message.attachments]
             await ctx.send(embed=embed, files=files)
 
     @commands.Cog.listener()
     async def on_message_delete(self, message):
         if self.snipe_dict.get(message.channel.id, None) is not None:
-            self.snipe_dict[message.channel.id].append((message, datetime.now()))
+            self.snipe_dict[message.channel.id].append((message, datetime.utcnow()))
         else:
-            self.snipe_dict[message.channel.id] = [(message, datetime.now())]
+            self.snipe_dict[message.channel.id] = [(message, datetime.utcnow())]
         if len(self.snipe_dict[message.channel.id]) >= 10:  # avoid destroying your cache memory
             self.snipe_dict[message.channel.id] = self.snipe_dict[message.channel.id][-10:]
 
