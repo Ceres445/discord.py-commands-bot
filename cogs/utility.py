@@ -20,9 +20,9 @@ class Utility(commands.Cog):
         if message is None:
             return await ctx.send("No messages to snipe")
         else:
-            embed = discord.Embed(title='SNIPE', description=f"`{message.content or 'They sent nothing'}` \n "
-                                                             f"deleted at {deleted_at}",
-                                  timestamp=datetime.utcnow())
+            embed = discord.Embed(title='SNIPE',
+                                  description=f"{message.content or 'They sent nothing'} \n ",
+                                  timestamp=deleted_at)
             embed.set_author(name=message.author.name, icon_url=message.author.avatar_url)
             embed.set_footer(text=message.channel.name)
             await ctx.send(embed=embed, files=[await x.to_file() for x in message.attachments])
@@ -40,9 +40,11 @@ class Utility(commands.Cog):
                                   timestamp=datetime.utcnow())
             files = []
             for message, deleted_at in messages:
-                embed.add_field(name=f'Message deleted by {message.author.name}',
-                                value=f"`{message.content or 'They sent nothing'}`, deleted {deleted_at}")
-                files.append([await x.to_file() for x in message.attachments])
+                embed.add_field(name=f'Message deleted',
+                                value=f"Author: {message.author.mention}\n"
+                                      f"Content: {message.content or 'They sent nothing'}\n"
+                                      f"Deleted: {deleted_at}")
+                files += [await x.to_file() for x in message.attachments]
             await ctx.send(embed=embed, files=files)
 
     @commands.Cog.listener()
