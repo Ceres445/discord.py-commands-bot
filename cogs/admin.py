@@ -26,7 +26,7 @@ class Owner(commands.Cog):
     @commands.command(pass_context=True, hidden=True, name='eval')
     async def _eval(self, ctx, *, args):
         """Evaluates code"""
-
+        """Sourced from: https://github.com/Rapptz/RoboDanny"""
         env = {
             'bot': self.bot,
             'ctx': ctx,
