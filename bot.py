@@ -64,7 +64,7 @@ class Bot(commands.AutoShardedBot):
 
 
 def main():
-    postgres, token = config.load_vars()
+    token = config.load_vars()
     loop = asyncio.get_event_loop()
     loop.run_until_complete(Bot.setup(token))
 
